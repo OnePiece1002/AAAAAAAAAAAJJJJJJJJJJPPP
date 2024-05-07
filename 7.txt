@@ -1,0 +1,63 @@
+JSP
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Login Form</title>
+</head>
+<body>
+
+<form name="loginform" method="post" action="LoginServlet">
+    <br/><br/><br/><br/>
+    <table align="center">
+        <tr><td align="center"><font color="blue" size="10">LOGIN FORM</font></td></tr>
+        <tr><td><table><td>Username</td><td><input type="text" name="user"/></td></tr>
+        <tr><td>Password</td><td><input type="password" name="pwd"/></td></tr>
+        <tr><td align="center"><input type="submit" value="Login"/></td><td align="center"><input type="reset" value="Reset"/></td></tr>
+    </table>
+</form>
+
+</body>
+</html>
+
+
+JAVA
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        String username = request.getParameter("user");
+        String password = request.getParameter("pwd");
+
+        // Dummy validation, you should implement proper validation here
+        if (username.equals("admin") && password.equals("admin")) {
+            out.println("<html><body>");
+            out.println("<h2>Successfully Logged In</h2>");
+            out.println("</body></html>");
+        } else {
+            out.println("<html><body>");
+            out.println("<h2>Failed to Log In. Please check your credentials.</h2>");
+            out.println("</body></html>");
+        }
+        out.close();
+    }
+}

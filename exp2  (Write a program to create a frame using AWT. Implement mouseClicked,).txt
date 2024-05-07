@@ -1,0 +1,85 @@
+import java.awt.*;
+import java.awt.event.*;
+
+public class MouseEx extends Frame implements MouseListener,MouseMotionListener {
+    Button b;
+    Label l;
+    Label c;
+    MouseEx()
+    {
+        super("MouseEx");
+        l=new Label();
+        c=new Label();
+        b=new Button("Exit");
+        l.setBounds(25,60,280,30);
+        c.setBounds(70,100,280,30);
+        l.setAlignment(Label.CENTER);
+        b.setBounds(500,40,100,40);
+        b.addActionListener(e -> System.exit(0));
+
+
+        this.add(l);
+        this.add(b);
+        this.add(c);
+        this.setSize(700,700);
+        this.setLayout(null);
+        this.setVisible(true);
+
+        this.addMouseListener(this);
+        this.addWindowFocusListener(new WindowAdapter(){
+            public void windowClose(WindowEvent e)
+            {
+                dispose();
+            }});}
+    public static void main(String args[])
+    {
+        new MouseEx();
+    }
+    @Override
+    public void mouseClicked(MouseEvent var1){
+        l.setText("mouse Clicked");
+        l.setBackground(Color.ORANGE);
+        Graphics g=getGraphics();
+        g.setColor(Color.BLUE);
+        g.fillOval(var1.getX(),var1.getY(),30,30);
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent var1){
+        l.setText("Mouse Entered");
+        l.setBackground(Color.GREEN);
+    }
+
+    @Override
+    public void mouseExited(MouseEvent var1){
+        l.setText("Mouse Exited");
+        l.setBackground(Color.RED);
+    }
+
+    @Override
+    public void mousePressed(MouseEvent var1){
+        l.setText("Mouse Pressed");
+        l.setBackground(Color.MAGENTA);
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        l.setText("Mouse Released");
+        l.setBackground(Color.CYAN);
+
+    }
+
+    @Override
+
+    public void mouseDragged(MouseEvent e) {
+        Graphics g = getGraphics();
+        g.setColor(Color.BLUE);
+        g.fillOval(e.getX(), e.getY(), 20, 20);
+    }
+
+    public void mouseMoved(MouseEvent d) {
+        c.setText("X="+d.getX()+", Y="+d.getY());
+    }
+
+}

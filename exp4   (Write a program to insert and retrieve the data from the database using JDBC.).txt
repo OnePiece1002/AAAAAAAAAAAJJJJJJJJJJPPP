@@ -1,0 +1,36 @@
+import java.sql.*;
+public class JDBCsql {
+static final String DB_URL = "jdbc:mysql://localhost:3306/javaDB";
+static final String USER = "root";
+static final String PASS = "dipak";
+public static void main(String[] args) {
+Connection connection = null;
+Statement stmt = null;
+try {
+Class.forName("com.mysql.cj.jdbc.Driver");
+System.out.println("Connecting to database...");
+connection = DriverManager.getConnection(DB_URL, USER, PASS);
+System.out.println("Connected to database successfully...");
+stmt = connection.createStatement();
+System.out.println("Inserting records into the table...");
+String sql = "INSERT INTO Registration VALUES(100,'Sachin','Tendulkar',18)";
+stmt.executeUpdate(sql);
+sql = "INSERT INTO Registration VALUES(101,'Virat','Kohli',25)";
+stmt.executeUpdate(sql);
+sql = "INSERT INTO Registration VALUES(102,'Dipak','Urade',30)";
+stmt.executeUpdate(sql);
+sql = "INSERT INTO Registration VALUES(103,'Kshitj','Rajgude',28)";
+stmt.executeUpdate(sql);
+System.out.println("Inserted records into the table...");
+} catch (ClassNotFoundException | SQLException e) {
+e.printStackTrace();
+} finally {
+try {
+if (stmt != null) stmt.close();
+if (connection != null) connection.close();
+} catch (SQLException e) {
+e.printStackTrace();
+}
+}
+}
+}
