@@ -1,1 +1,8 @@
-
+1 - path copy in cmd 
+2- set path in cmd 
+3- set path of java bin 1.8
+4-then run all files by javac *.java
+5. now run command rmic two
+6- now run command rmiregistry
+7 - java rmiserver
+8- on second cmd run rmiclient with same path
